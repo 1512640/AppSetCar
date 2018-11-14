@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+        width:100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> Google Map</h1> 
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        var kolkata= new google.maps.LatLng(10.842208,106.767935);
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: kolkata,
+          zoom: 15,
+        });
+        var marker=new google.maps.Marker({
+          position: kolkata,
+          map:map,
+          title: 'hello World',
+          animation:google.maps.Animation.BOUNCE,
+        });
+        marker.setMap(map);
+      };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M&callback=initMap"
+    async defer></script>
+  </body>
+</html>

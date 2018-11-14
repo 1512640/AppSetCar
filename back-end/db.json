@@ -1,0 +1,17 @@
+{
+  "customer": [
+    {
+      "addr": "3/2 quận 5 tp Hồ Chí Minh",
+      "name": "Nguyễn Văn Trung",
+      "sdt": "09811312XX",
+      "note": "yêu cầu xe Z1000"
+    },
+    {
+      "addr": "duong 3/2",
+      "name": "Van A",
+      "sdt": "1234",
+      "note": "a1"
+    }
+   
+  ]
+}
