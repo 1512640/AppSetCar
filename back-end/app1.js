@@ -51,17 +51,36 @@ var router = express.Router();
 
 //     fn();
 // })
+// router.get('/resInform', (req, res) => {
+//     var ts = 0;
+//     if (req.query.ts) {
+//         ts = +req.query.ts;
+//     }
 
+//     var categories = db.get('customer').filter(c => c.iat >= ts);
+
+//     var return_ts = moment().unix();
+//     res.json({
+//         return_ts,
+//         categories
+//     });
+// })
 router.post('/', (req, res) => {
-    var inform = {
-        addr: req.body.addr,
-        name: req.body.name,
-        sdt: req.body.sdt,
-        note: req.body.note,
-        //iat: moment().unix()
+    
+    var stt=db.get('customer')
+    .size()
+    .value();
+    var c = {
+        "stt": ++stt,
+        "addr": req.body.addr,
+        "name": req.body.name,
+        "sdt": req.body.sdt,
+        "note": req.body.note,
+        "state": "chưa được định vị",
+        "iat": moment().unix()
     }
-
-    db.get('customer').push(inform).write();
+    console.log(c);
+    db.get('customer').push(c).write();
 
     res.statusCode = 201;
     res.json({

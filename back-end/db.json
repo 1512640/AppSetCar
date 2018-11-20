@@ -1,17 +1,22 @@
 {
   "customer": [
     {
-      "addr": "3/2 quận 5 tp Hồ Chí Minh",
-      "name": "Nguyễn Văn Trung",
-      "sdt": "09811312XX",
-      "note": "yêu cầu xe Z1000"
+      "stt": 1,
+      "addr": "abc",
+      "name": "trung",
+      "sdt": "06545645456",
+      "note": "ábasnsbd",
+      "state": "đã định vị",
+      "iat": 1542707149
     },
     {
-      "addr": "duong 3/2",
-      "name": "Van A",
-      "sdt": "1234",
-      "note": "a1"
+      "stt": 2,
+      "addr": "227 Nguyễn Văn Cừ TP Hồ Chí Minh",
+      "name": "trung",
+      "sdt": "06545645456",
+      "note": "ábasnsbd",
+      "state": "đã định vị",
+      "iat": 1542707360
     }
-   
   ]
 }

@@ -5,7 +5,6 @@ var express = require('express'),
 
 var app1Ctrl = require('./app1');
 var app2Ctrl = require('./app2');
-var app3Ctrl = require('./app3');
 var app = express();
 
 app.use(morgan('dev'));
@@ -14,8 +13,7 @@ app.use(bodyParser.json({
 app.use(cors());
 
 app.use('/sendInform', app1Ctrl);
-app.use('/resInform', app2Ctrl);
-app.use('/getList', app3Ctrl);
+app.use('/resInform',app2Ctrl);
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`API running on PORT ${PORT}`);
