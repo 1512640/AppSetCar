@@ -1,43 +1,62 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>APP #3</title>
-    <meta charset="utf-8">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M"
+            async defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+
+    <link rel="stylesheet" href="./deafault.css">
+    <script type="text/javascript" src="./javaScript_index3.js"></script>
 </head>
 <body>
-    <ul id="list"></ul>
-    <script id="template" type="text/x-handlebars-template">
-        {{#each this}}
-            <li>{{name}}</li>
-            <li>{{addr}}</li>
-            <li>{{sdt}}</li>
-        {{/each}}
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <div class="container">
+        <div id="app3">
 
-    <script type="text/javascript">
-        ts = 0;
-
-        window.onload = function() {
-            loadCategories();
-        }
-
-        var loadCategories = function() {
-            var url = 'http://localhost:3000/categories?ts=' + ts;
-            axios.get(url)
-                .then(function(res) {
-                    ts = res.data.return_ts;
-                    var source = document.getElementById('template').innerHTML;
-                    var template = Handlebars.compile(source);
-                    var html = template(res.data.categories);
-                    document.getElementById('list').innerHTML += html;
-                }).catch(function(err) {
-                    console.log(err);
-                }).then(function() {
-                    setTimeout(loadCategories, 3500);
-                })
-        }
-    </script>
+            <h2 class="text-center">DANH SÁCH REQUEST</h2>
+            
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="text-center" scope="col">Name</th>
+                        <th class="text-center" scope="col">Address</th>
+                        <th class="text-center" scope="col">Phone</th>
+                        <th class="text-center" scope="col">Status</th>
+                    </tr>
+                </thead>
+               
+                <tbody id="list">
+                    <script id="template" type="text/x-handlebars-template">
+                        {{#each this}}
+                        <tr class="text-center">
+                            <td>{{name}}</td>
+                            <td scope="row">{{addr}}</td>
+                            <td>{{sdt}}</td>
+                            <td><a href="#" id="state{{stt}}" onclick="getState({{ stt }})">{{state}}</a></td>
+                        </tr>
+                        {{/each}}
+                    </script>
+                </tbody>
+                   
+            </table>
+               
+        </div>
+        <div id="Map">
+            <button onclick="hienThiDanhSach()"  class="btn btn-primary" >Quay về</button>
+            <div class="row">
+                <div id="googleMap" class="khungMap col-6"></div>
+                <div id="instructions" class="col-6"></div>
+            </div>
+        </div>
+    </div>
+    <div id="goTop">
+        <img src="./Images/dauTrang.png" alt="DauTrang" id="dauTrang" />
+        <span>Đầu Trang</span>
+    </div>
 </body>
 </html>

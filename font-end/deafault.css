@@ -1,0 +1,30 @@
+.div {
+    position: relative;
+}
+
+.khungMap {
+    width: 500px;
+    height: 500px;
+}
+
+.status {
+}
+
+.center {
+    position: absolute;
+    margin: 0 auto;
+}
+#goTop {
+    bottom: 100px;
+    cursor: pointer;
+    display: none;
+    height: 35px;
+    position: fixed;
+    right: 10px;
+    width: 90px;
+    z-index: 1000;
+}
+#dauTrang{
+    width:80px;
+    height:80px;
+}

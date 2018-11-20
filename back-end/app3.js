@@ -3,12 +3,24 @@ var express = require('express'),
     low = require('lowdb'),
     fileSync = require('lowdb/adapters/FileSync');
 
-var adapter = new fileSync('./db.json');
-var db = low(adapter);
 
 var router = express.Router();
 router.get('/', (req, res) => {
-    var inform = db.get('customer');
-    res.json(inform);
+    var ts = 0;
+    if (req.query.ts) {
+        ts = + req.query.ts;
+    }
+    var adapter = new fileSync('./db.json');
+    var db = low(adapter);
+
+    var inform = db.get('customer').filter(c => c.iat >= ts);
+    
+
+    var return_ts = moment().unix();
+    console.log(inform.size().value());
+    res.json({
+        inform,
+        return_ts
+    });
 });
 module.exports = router;
