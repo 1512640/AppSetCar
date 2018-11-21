@@ -19,7 +19,7 @@
         <div id="app3">
 
             <h2 class="text-center">DANH SÁCH REQUEST</h2>
-            
+
             <table class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
@@ -29,28 +29,32 @@
                         <th class="text-center" scope="col">Status</th>
                     </tr>
                 </thead>
-               
+
                 <tbody id="list">
                     <script id="template" type="text/x-handlebars-template">
                         {{#each this}}
                         <tr class="text-center">
                             <td>{{name}}</td>
-                            <td scope="row">{{addr}}</td>
+                            <td id="addr{{stt}}">{{addr}}</td>
                             <td>{{sdt}}</td>
-                            <td><a href="#" id="state{{stt}}" onclick="getState({{ stt }})">{{state}}</a></td>
+                            <td><button id="state{{stt}}" onclick="getState({{ stt }})" class="boder">{{state}}</button></td>
                         </tr>
                         {{/each}}
                     </script>
                 </tbody>
-                   
+
             </table>
-               
+
         </div>
         <div id="Map">
-            <button onclick="hienThiDanhSach()"  class="btn btn-primary" >Quay về</button>
+            <br />
             <div class="row">
-                <div id="googleMap" class="khungMap col-6"></div>
-                <div id="instructions" class="col-6"></div>
+                <button onclick="hienThiDanhSach()" class="btn btn-primary center boder">Quay về</button>
+            </div>
+            <br />
+            <div class="row">
+                <div id="googleMap" class="khungMap col-md-6 col-sm-12"></div>
+                <div id="instructions" class="col-md-6 col-sm-12"></div>
             </div>
         </div>
     </div>

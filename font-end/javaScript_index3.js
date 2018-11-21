@@ -1,10 +1,31 @@
 ﻿var ts = 0;
+var add_start;
+var add_end = "Thành phố VŨng Tàu";
 var dataList;
+var nhanXe = "đã nhận xe";
+window.onload = function () {
+    $('#Map').css("display", "none");
+    LoadData();
+    
+}
 function initMap() {
     var directionsDisplay;
     var directionsService;
     var idGoogleMap = document.getElementById("googleMap");
+    var geocoder;
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': add_start }, function (results, status) {
+        if (status == 'OK') {
+            add_start = results[0].geometry.location;
 
+        }
+    });
+    geocoder.geocode({ 'address': add_end }, function (results, status) {
+        if (status == 'OK') {
+            add_end = results[0].geometry.location;
+
+        }
+    });
     var hCm = new google.maps.LatLng(10.776530, 106.700980);
     var nhaTrang = new google.maps.LatLng(12.238791, 109.196747);
     var currentPosstion;
@@ -32,8 +53,8 @@ function initMap() {
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({    // hàm route của DirectionsService sẽ thực hiện tính toán với các tham số truyền vào
-            origin: hCm,    // điểm xuất phát
-            destination: nhaTrang,    // điểm đích
+            origin: add_start,    // điểm xuất phát
+            destination: add_end,    // điểm đích
             travelMode: 'DRIVING',     // phương tiện di chuyển
         }, function (response, status) {    // response trả về bao gồm tất cả các thông tin về chỉ đường
             if (status === google.maps.DirectionsStatus.OK) {
@@ -62,10 +83,7 @@ function initMap() {
 }
 
 
-window.onload = function () {
-    $('#Map').css("display", "none");
-    LoadData();
-}
+
 function chiDan () {
     $('#app3').css("display", "none");
     $('#Map').css("display", "block");
@@ -75,24 +93,7 @@ function hienThiDanhSach () {
     $('#Map').css("display", "none");
     $('#app3').css("display", "block");
 }
-function setStatus(status) {
-    alert("AAAA")
-    switch (status) {
-        case "đã định vị":
-            $('#state').css("class", "bg-warning text-white");
-            break
-        case "đã có xe nhận":
-            $('#state').css("class", "bg-info text-white");
-            break;
-        case "đang di chuyển":
-            $('#state').css("class", "bg-success text-white");
-            break;
-        case "đã hoàn thành":
-            $('#state').css("class", "bg-primary text-white");
-            break;
-        default: $('#state').css("class", "bg -dark text - white");
-    }
-}
+
 function LoadData() {
 	var url = 'http://localhost:3000/getList?ts='+ ts;
     axios.get(url)
@@ -101,21 +102,43 @@ function LoadData() {
             dataList = res.data.inform;         
             var source = document.getElementById('template').innerHTML;
             var template = Handlebars.compile(source);
-            var html = template(dataList);
+            var html = template(dataList);        
             document.getElementById('list').innerHTML += html;
+            for (i = 0; i < dataList.length; i++) {
+                setStatus(dataList[i].stt);
+            }
         }).catch(function (err) {
             alert(err);
         }).then(function () {         
-           setTimeout(LoadData, 1000);         
+           setTimeout(LoadData, 1000);         //realtime
         });
 };
+function setStatus(stt) {
+    var state;
+    state = document.getElementById("state" + stt).innerHTML;
+    switch (state) {
+        case "đã định vị":
+            $('#state' + stt).addClass("bg-warning text-white");
+            break
+        case nhanXe:
+            $('#state' + stt).addClass("bg-info text-white");
+            break;
+        case "đang di chuyển":
+            $('#state' + stt).addClass("bg-success text-white");
+            break;
+        case "đã hoàn thành":
+            $('#state' + stt).addClass("bg-primary text-white");
+            break;
+        default: $('#state' + stt).addClass("bg-dark text-white");
+    }
+}
 function getState(ind) {
     var str;
     str = document.getElementById("state" + ind).innerHTML;
-    if (str === "đã nhận xe") {
+    if (str === nhanXe) {
+        add_start = document.getElementById("addr" +ind).innerHTML; //lay vi tri bat dau
         chiDan();
-    }
-    else alert("Chưa nhận xe");
+    }  
 }
 $(function () {
 	$(window).scroll(function () {

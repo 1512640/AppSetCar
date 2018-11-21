@@ -1,18 +1,43 @@
-.div {
+.div .row {
     position: relative;
+    padding-bottom: 20px;
 }
-
+.containerSmall {
+    width: 600px;
+    background-color: lightblue;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
 .khungMap {
     width: 500px;
     height: 500px;
 }
-
-.status {
+.khungVien {
+    background-color: lightgrey;
+    /* width: 300px; */
+    border: 2px solid green;
+    padding: 20px;
+    margin: 2px;
+    border-radius: 28px;
+}
+.boder {
+    border-radius: 20px;
+    padding: 8px;
 }
 
 .center {
-    position: absolute;
     margin: 0 auto;
+}
+.right{
+    float: right;
+}
+.table-bordered {
+    border: 8px solid #dee2e6;
+}
+.buttonTimXe {
+    border-radius: 13px;
+    margin: 0 auto;
+    margin-top: 16px;
 }
 #goTop {
     bottom: 100px;
