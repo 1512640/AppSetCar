@@ -24,26 +24,17 @@
       "name": "Tuấn",
       "sdt": "065456",
       "note": "ehivoo",
-      "state": "đã nhận xe",
+      "state": "đã định vị",
       "iat": 1542702358
     },
     {
       "stt": 4,
-      "addr": "AGR",
+      "addr": "Vũng Tàu",
       "name": "ThanhA",
       "sdt": "325",
       "note": "SGDSH",
-      "state": "đang di chuyển",
+      "state": "đã định vị",
       "iat": 1542786540
-    },
-    {
-      "stt": 6,
-      "addr": "AGR",
-      "name": "ThanhD",
-      "sdt": "325",
-      "note": "SGDSH",
-      "state": "chưa được định vị",
-      "iat": 1542786574
     }
   ]
 }

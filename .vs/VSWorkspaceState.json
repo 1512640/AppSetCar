@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\back-end",
-    "\\font-end"
+    "\\font-end",
+    "\\font-end\\css",
+    "\\font-end\\Images",
+    "\\font-end\\java"
   ],
-  "SelectedNode": "\\font-end\\deafault.css",
+  "SelectedNode": "\\font-end\\index3.html",
   "PreviewInSolutionExplorer": false
 }

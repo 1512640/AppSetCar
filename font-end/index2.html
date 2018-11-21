@@ -1,269 +1,59 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
-    <title>Client Map</title>
+<head>
+    <title>APP #2</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-        width:100%;
-      }
-      .row {
-        height: 500px;
-        width:100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      table, th, td {
-          border: 1px solid black;
-          border-collapse: collapse;
-      }
-      th, td {
-          padding: 5px;
-          text-align: left;
-      }
-    </style>
-  </head>
-
-  <body>
-    <h1> # APP2</h1> 
-    <div class="container">
-      <div class="row">
-      <div class="col-md-8" id="map1">
-          <div id="map"></div>
-      </div>        
-      <div class="col-md-4" id="inf">
-         <div class="nenvang">
-         
-          
-           <h2>Thông tin khách hàng gửi yêu cầu</h2>
-              <p>To add a caption to a table, use the caption tag.</p>
-
-              <table style="width:100%" id="list">
-                <caption>LOADDING......!</caption>
-                <tr>
-                  <th>Tên Khách Hàng</th>
-                  <th>Địa Chỉ</th>
-                  <th>Số điện thoại</th>
-                  <th>Ghi chú</th>
-                </tr>
-                
-                 
-              </table>
-           
-         </div>
-      </div>
-    </div>
-    </div>
-    
-    <script id="template" type="text/x-handlebars-template">
-      
-      {{#each this}}
-      <tr>          
-        <td id="name-{{stt}}" >{{name}}</td>
-        <td ><a href="#" onclick= "codeAddress({{stt}})" id="add-{{stt}}" >{{addr}}</a></td>
-        <td>{{sdt}}</td>
-        <td>{{note}}</td>
-      </tr>
-      {{/each}}
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-   <!--  <script>
-    //   var map;
-    //   var lat,lng;
-    //   var geocoder;
-    //   geocoder = new google.maps.Geocoder();
-    //   // geoCode();
-    //   // function geoCode(){
-    //   //   var location=" 77/1 đăng văn bi, thủ đức, TP hồ chí minh",
-    //   //   axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
-    //   //     param :{
-    //   //       adress:location,
-    //   //       key: 'AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M'
-    //   //     }
-    //   //   })
-    //   //   .then(function(response){
-    //   //     lat=response.data.results[0].geometry.location.lat;
-    //   //     lng=response.data.results[0].geometry.location.lng;
-    //   //   })
-    //   //   .catch(function(error){
-    //   //       console.log(error)
-    //   //   })
-    //   // }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M&callback=initMap"
+            async defer></script>
+    <link rel="stylesheet" href="./css/deafault.css" />
+    <link rel="stylesheet" href="./css/index2.css" />
+    <script type="text/javascript" src="./java/index2.js"></script>
 
-    //   // initMap();
-    //   function initMap() {
-    //     var kolkata= new google.maps.LatLng(-34.397,150.644);
-    //     map = new google.maps.Map(document.getElementById('map'), {
-    //       center: kolkata,
-    //       zoom: 8,
-    //     });
-    //     var marker=new google.maps.Marker({
-    //       position: kolkata,
-    //       map:map,
-    //       title: 'hello World',
-    //       animation:google.maps.Animation.BOUNCE,
-    //     });
-    //     marker.setMap(map);
-    //   };
-    //   function codeAddress() {
-    //   // var address = document.getElementById('add1').innerHTML;
-    //   var address = "77/1 đặng văn bi";
-    //     geocoder.geocode( { 'address': address}, function(results, status) {
-    //       if (status == 'OK') {
-    //       map.setCenter(results[0].geometry.location);
-    //       var marker = new google.maps.Marker({
-    //         map: map,
-    //         position: results[0].geometry.location
-    //     });
-    //   } else {
-    //     alert('Geocode was not successful for the following reason: ' + status);
-    //     }
-    //   });
-    // }
-    var geocoder;
-    var map;
-   function initMap() {
-    geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(10.83901,106.7645653);
-    var mapOptions = {
-      zoom: 8,
-      center: latlng
-    }
-    
-    map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    var marker=new google.maps.Marker({
-          position: latlng,
-          map:map,
-          title: 'hello World',
-          animation:google.maps.Animation.BOUNCE,
-          draggable: true
-        });
-        marker.setMap(map);
-        google.maps.event.addDomListener(marker,'dragstar',function(event){
-          console.log('bat dau di chuyen',event)
-        })
-        google.maps.event.addDomListener(marker,'dragend',function(event){
-          console.log('da dat marker',event)
-        })
-  }
+</head>
 
-    function codeAddress(ind) {
-      
-      var address = document.getElementById("add-"+ind).innerHTML;
-      alert(address);
-      //var address = " 77 đăng văn bi thủ đức HCM"
-      geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == 'OK') {
-          map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-          });
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-      });
-    }
+<body>
+    <div class="container_repair">
+        <div class="row">
+            <div class="col-md-6 col-sm-12" id="map1">
+                <div id="map"></div>
+            </div>
+            <div class="col-md-6 col-sm-12" id="inf">
+                <div class="nenvang">
+                    <h3>Thông tin khách hàng gửi yêu cầu</h3>
+                    <table class="table table-bordered" id="list">
+                        <caption><div class="loader center"></div></caption>
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center" scope="col">Tên Khách Hàng</th>
+                                <th class="text-center" scope="col">Địa Chỉ</th>
+                                <th class="text-center" scope="col">Số điện thoại</th>
+                                <th class="text-center" scope="col">Ghi chú</th>
+                            </tr>
+                        </thead>
+                    </table>
 
+                </div>
+            </div>
+        </div>
+        
+    </div>
 
-    </script> -->
-    
-    <script type="text/javascript">
-    ts = 0;
+    <script id="template" type="text/x-handlebars-template">
 
-    window.onload = function() {
-        loadInform();
-        initMap();
-    }
+        {{#each this}}
+        <tr class="text-center">
+            <td id="name-{{stt}}">{{name}}</td>
+            <td><a href="#" onclick="codeAddress({{stt}})" id="add-{{stt}}">{{addr}}</a></td>
+            <td>{{sdt}}</td>
+            <td>{{note}}</td>
+        </tr>
+        {{/each}}
+    </script>
 
-    var loadInform = function() {
-        var url = 'http://localhost:3000/resInform?ts=' + ts;
-        axios.get(url)
-            .then(function(res) {
-              ts = res.data.return_ts;
-              var source = document.getElementById('template').innerHTML;
-              var template = Handlebars.compile(source);
-              var html = template(res.data.categories);
-              document.getElementById('list').innerHTML += html;
-              console.log(res.data)
-            }).catch(function(err) {
-                console.log(err);
-            }).then(function() {
-              setTimeout(loadInform, 3500);
-            })
-    }
-    var geocoder;
-    var map;
-   function initMap() {
-    geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(10.83901,106.7645653);
-    var mapOptions = {
-      zoom: 8,
-      center: latlng
-    }
-    
-    map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    var marker=new google.maps.Marker({
-          position: latlng,
-          map:map,
-          title: 'hello World',
-          animation:google.maps.Animation.BOUNCE,
-          draggable: true
-        });
-        marker.setMap(map);
-        google.maps.event.addDomListener(marker,'dragstar',function(event){
-          console.log('bat dau di chuyen',event)
-        })
-        google.maps.event.addDomListener(marker,'dragend',function(event){
-          console.log('da dat marker',event)
-        })
-  }
+</body>
 
-    function codeAddress(ind) {
-      
-      var address = document.getElementById("add-"+ind).innerHTML;
-      alert(address);
-      //var address = " 77 đăng văn bi thủ đức HCM"
-      var name = document.getElementById("name-"+ind).innerHTML;
-      geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == 'OK') {
-          map.setCenter(results[0].geometry.location);
-          map.setZoom(15);
-          var marker = new google.maps.Marker({
-              map: map,
-              title: name,
-              position: results[0].geometry.location,
-              draggable: true
-          });
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-         google.maps.event.addDomListener(marker,'dragstar',function(event){
-          console.log('bat dau di chuyen',event)
-        })
-        google.maps.event.addDomListener(marker,'dragend',function(event){
-          console.log('da dat marker'+ event.latLng.lat() +'-'+ event.latLng.lng())
-        })
-      });
-    }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M&callback=initMap"
-    async defer></script>
-  </body>
-
-
-
-  
 </html>

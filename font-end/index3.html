@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>APP #3</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M"
@@ -10,9 +12,8 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-
-    <link rel="stylesheet" href="./deafault.css">
-    <script type="text/javascript" src="./javaScript_index3.js"></script>
+    <link rel="stylesheet" href="./css/deafault.css">
+    <script type="text/javascript" src="./java/index3.js"></script>
 </head>
 <body>
     <div class="container">
@@ -21,8 +22,10 @@
             <h2 class="text-center">DANH SÁCH REQUEST</h2>
 
             <table class="table table-bordered">
+                <caption><div class="loader center"></div></caption>
                 <thead class="thead-light">
                     <tr>
+                        <th class="text-center" scope="col">STT</th>
                         <th class="text-center" scope="col">Name</th>
                         <th class="text-center" scope="col">Address</th>
                         <th class="text-center" scope="col">Phone</th>
@@ -34,6 +37,7 @@
                     <script id="template" type="text/x-handlebars-template">
                         {{#each this}}
                         <tr class="text-center">
+                            <td>{{stt}}</td>
                             <td>{{name}}</td>
                             <td id="addr{{stt}}">{{addr}}</td>
                             <td>{{sdt}}</td>
