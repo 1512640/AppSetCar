@@ -5,8 +5,7 @@ var dataList;
 var nhanXe = "đã nhận xe";
 window.onload = function () {
     $('#Map').css("display", "none");
-    LoadData();
-    
+    LoadData();  
 }
 function initMap() {
     var directionsDisplay;
@@ -59,6 +58,7 @@ function initMap() {
         }, function (response, status) {    // response trả về bao gồm tất cả các thông tin về chỉ đường
             if (status === google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response); // hiển thị chỉ đường trên bản đồ (nét màu đỏ từ A-B)
+               
                 showSteps(response); // Hiển thị chi tiết các bước cần phải đi đến đích.
             } else {
                 window.alert('Request for getting direction is failed due to ' + status);    // Hiển thị lỗi
