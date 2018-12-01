@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>App4</title> 
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M&callback=initMap"
+            async defer></script>
+    <link rel="stylesheet" href="./css/deafault.css" />
+    <link rel="stylesheet" href="./css/index2.css" />
+    <script type="text/javascript" src="./java/index4.js"></script>
+      <style>
+          body {font-family: Arial, Helvetica, sans-serif;}
+          form {border: 3px solid #f1f1f1;}
+
+          input[type=text], input[type=password] {
+              width: 100%;
+              padding: 12px 20px;
+              margin: 8px 0;
+              display: inline-block;
+              border: 1px solid #ccc;
+              box-sizing: border-box;
+          }
+
+          button {
+              background-color: #4CAF50;
+              color: white;
+              padding: 14px 20px;
+              margin: 8px 0;
+              border: none;
+              cursor: pointer;
+              width: 100%;
+          }
+
+          button:hover {
+              opacity: 0.8;
+          }
+
+          .cancelbtn {
+              width: auto;
+              padding: 10px 18px;
+              background-color: #f44336;
+          }
+
+          .imgcontainer {
+              text-align: center;
+              margin: 24px 0 12px 0;
+          }
+
+          img.avatar {
+              width: 40%;
+              border-radius: 50%;
+          }
+
+          .container {
+              padding: 16px;
+          }
+
+          span.psw {
+              float: right;
+              padding-top: 16px;
+          }
+
+          /* Change styles for span and cancel button on extra small screens */
+          @media screen and (max-width: 300px) {
+              span.psw {
+                 display: block;
+                 float: none;
+              }
+              .cancelbtn {
+                 width: 100%;
+              }
+          }
+         
+        
+     
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+        width:100%;
+      }
+      .row {
+        height: 500px;
+        width:100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+      }
+      th, td {
+          padding: 5px;
+          text-align: left;
+      }
+    </style>
+    <script type="text/javascript" src="./java/index4.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M&callback=initMap">
+    </script>
+  </head>
+  <body>
+    <div class="container_repair">
+        <div class="row">
+            <div class="col-md-6 col-sm-12" id="map1">
+                <div id="map"> </div>
+            </div>
+            <div class="col-md-6 col-sm-12" id="driver">
+                <div class="nenvang">
+                  
+                  <div id="dangnhap">
+                    <div class="imgcontainer">
+                      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                    </div>
+                      <div class="container">
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="uname" id="name" required>
+
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" id="pass" required>
+                            
+                        <button type="button" onclick="signIn()" id="signIn">Login</button>
+                        <label>
+                          <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                      </div>
+                    </div>
+                      
+                  <div id="list1">
+                  </div>
+
+                   
+
+                
+                   <!--  <h3>Thông tin khách hàng gửi yêu cầu</h3>
+                    <table class="table table-bordered" id="list1">
+                      <h3> <button type="button" class="btn" ><a href="login.html" >Đăng nhập</a></button> </h3>
+                        <caption><div class="loader center"></div></caption>
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center" scope="col">Tên Khách Hàng</th>
+                                <th class="text-center" scope="col">Địa Chỉ</th>
+                                <th class="text-center" scope="col">Số điện thoại</th>
+                                <th class="text-center" scope="col">Ghi chú</th>
+                            </tr>
+                        </thead>
+                    </table> -->
+
+                </div>
+            </div>
+           
+        </div>
+        
+    </div>
+    <script id="template1" type="text/x-handlebars-template">
+      
+      <h3> Thông tin Tài Xế </h3>
+        <ul class="text-center">
+            <li id="name-{{stt}}"> Họ và tên: {{name}}</li>
+            <li id="add-{{stt}}"> đia chi hiên tại : {{add}}</li>
+            <li id="status"> Trạng thái : {{status}}</li>
+           
+        </ul>
+        <div class="form-check" onclick="setStatus1()">
+                        <input class="form-check-input" type="radio" name="exampleRadios"  id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label"  for="exampleRadios1">
+                          Ready
+                        </label>
+                      </div>
+                      <div class="form-check"  onclick="setStatus2()">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"  value="option2">
+                        <label class="form-check-label"  for="exampleRadios2">
+                          Standby
+                        </label>
+                      </div>
+        
+        <h3>Thông tin khách hàng gửi yêu cầu</h3>
+                    <table class="table table-bordered" id="list2">
+                      
+                        <caption><div class="loader center"></div></caption>
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center" scope="col">Tên Khách Hàng</th>
+                                <th class="text-center" scope="col">Địa Chỉ</th>
+                                <th class="text-center" scope="col">Số điện thoại</th>
+                                <th class="text-center" scope="col">Ghi chú</th>
+                                <th class="text-center" scope="col">Time</th>
+                                <th class="text-center" scope="col"> Đồng ý nhận xe>
+                            </tr>
+                        </thead>
+                    </table> 
+                  
+        
+    </script>
+    <script id="template2" type="text/x-handlebars-template">
+
+        {{#each this}}
+        <tr class="text-center" >
+            <td id="name-{{stt}}">{{name}}</td>
+            <td><a href="#" onclick="codeAddress({{stt}})" id="add-{{stt}}">{{addr}}</a></td>
+            <td>{{sdt}}</td>
+            <td>{{note}}</td>
+            <td ></td>
+            <td id="accept" onclick="acceptClient()"> <button onclick="acceptClient({{stt}})class="btn">Accept</button></td>
+        </tr>
+        {{/each}}
+    </script>
+     
+    
+  </body>
+</html>

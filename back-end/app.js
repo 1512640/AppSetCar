@@ -6,6 +6,7 @@ var express = require('express'),
 var app1Ctrl = require('./app1');
 var app2Ctrl = require('./app2');
 var app3Ctrl = require('./app3');
+var app4Ctrl = require('./app4');
 var loginCtrl = require('./loginCtrl');
 var app = express();
 
@@ -18,6 +19,7 @@ app.use('/sendInform', app1Ctrl);
 app.use('/resInform', app2Ctrl);
 app.use('/getList', app3Ctrl);
 app.use('/login', loginCtrl);
+app.use('/driver', app4Ctrl);
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`API running on PORT ${PORT}`);

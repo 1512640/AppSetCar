@@ -1,72 +1,13 @@
 {
-  "customer": [
+  "customer": [],
+  "driver": [
     {
       "stt": 1,
-      "addr": "abc",
-      "name": "trung",
-      "sdt": "06545645456",
-      "note": "ábasnsbd",
-      "state": "đã định vị",
-      "iat": 1542707149
-    },
-    {
-      "stt": 2,
-      "addr": "227 Nguyễn Văn Cừ TP Hồ Chí Minh",
-      "name": "trung",
-      "sdt": "06545645456",
-      "note": "ábasnsbd",
-      "state": "đã định vị",
-      "iat": 1542707360
-    },
-    {
-      "stt": 3,
-      "addr": "CHợ Bến Thành",
-      "name": "Tuấn",
-      "sdt": "065456",
-      "note": "ehivoo",
-      "state": "đã nhận xe",
-      "iat": 1542702358
-    },
-    {
-      "stt": 4,
-      "addr": "Vũng Tàu",
-      "name": "ThanhA",
-      "sdt": "325",
-      "note": "SGDSH",
-      "state": "đã nhận xe",
-      "iat": 1542786540
-    }
-  ],
-  "account": [
-    {
-      "stt": 1,
-      "name": "Van A",
-      "pass": "1234",
+      "name": "Van B",
+      "pass": "123456",
+      "add": "....",
+      "status": "Ready",
       "iat": 1542993941
-    },
-    {
-      "stt": 3,
-      "name": "Van C",
-      "pass": "12345",
-      "iat": 1542994472
-    },
-    {
-      "stt": 3,
-      "name": "Van B",
-      "pass": "12334",
-      "iat": 1542998841
-    },
-    {
-      "stt": 4,
-      "name": "Van B",
-      "pass": "123456",
-      "iat": 1542998849
-    },
-    {
-      "stt": 5,
-      "name": "Van B",
-      "pass": "123456",
-      "iat": 1542998893
     }
   ]
 }

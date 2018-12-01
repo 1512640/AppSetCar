@@ -20,6 +20,7 @@ function registration() {
 function signIn() {
     var name = document.getElementById("name").value;
     var pass = document.getElementById("pass").value;
+    console.log(" name:"+name + "  pass:"+pass);
     var json = {
         name: name,
         pass: pass
@@ -31,6 +32,7 @@ function signIn() {
     }).then(function (res) {
         if (res.status == 201) {
             alert(res.data.msg);
+            window.location="./index4.html";
         }
         else {
             alert(res.data.msg);
