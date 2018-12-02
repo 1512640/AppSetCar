@@ -1,28 +1,32 @@
 var map;
 var success=false;
 var user;
+var add_start;
+var add_end;
+var directionsDisplay;
+var directionsService;
 //var ds;
 //var ind=1;
 var marker;
-var LatlngUser;
+var LatlngUser; // dau vao 
 var ts=0;
 window.onload = function () {
   //$("#registration").css('display', 'none');
     initMap(); 
 }
 
-      function initMap() {
+  function initMap() {
         
     map = new google.maps.Map(document.getElementById('map'), {
     zoom: 10,
     center: {lat:10.7699421, lng: 106.6734581 }
-    });
+      });
+    directionsService = new google.maps.DirectionsService();    // Khởi tạo DirectionsService - thằng này có nhiệm vụ tính toán chỉ đường cho chúng ta.
+    directionsDisplay = new google.maps.DirectionsRenderer({ map: map });    // Khởi tạo DirectionsRenderer - thằng này có nhiệm vụ hiển thị chỉ đường trên bản đồ sau khi đã tính toán.
     map.addListener('click', function(e) {
     geoLocation(e.latLng);
     
-    });
-    
-    
+    }); 
   }
   function geoLocation(latLng){      ///hàm lấy vị trí hiện tại
     if (navigator.geolocation) {
@@ -87,8 +91,6 @@ window.onload = function () {
         }
       }
 
-    
-
 function placeMarkerAndPanTo(latLng, map) {
    marker = new google.maps.Marker({
     position: latLng,
@@ -99,7 +101,23 @@ function placeMarkerAndPanTo(latLng, map) {
   alert(latLng.lat())
   map.panTo(latLng);
 }
+ //Chi duong
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
+    directionsService.route({    // hàm route của DirectionsService sẽ thực hiện tính toán với các tham số truyền vào
+        origin: add_start,    // điểm xuất phát
+        destination: add_end,    // điểm đích
+        travelMode: 'DRIVING',     // phương tiện di chuyển
+    }, function (response, status) {    // response trả về bao gồm tất cả các thông tin về chỉ đường
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response); // hiển thị chỉ đường trên bản đồ (nét màu đỏ từ A-B)
+
+            //showSteps(response); // Hiển thị chi tiết các bước cần phải đi đến đích.
+        } else {
+            window.alert('Request for getting direction is failed due to ' + status);    // Hiển thị lỗi
+        }
+    });
+}
 
 
 function registration() {
@@ -271,13 +289,18 @@ function requestDriver()
           })
         }
 }
-function acceptClient(ind){
+function acceptClient(ind) {
+    alert(ind);
   var vitri=user.stt;
   var url = 'http://localhost:3000/driver/setClient?stt=' + vitri+'&state='+"đã nhận xe";
     axios.get(url)
-        .then(function (res) {
-            
-            console.log(res.data)
+        .then(function (res) {            
+            console.log(res.data);
+            add_start = LatlngUser;
+            alert(add_start);
+            add_end = document.getElementById("add-" + ind).innerHTML;
+            alert(add_end);
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
         }).catch(function (err) {
             console.log(err);
         }).then(function () {
