@@ -1,6 +1,6 @@
 ﻿var ts = 0;
-var add_start;
-var add_end = "Thành phố VŨng Tàu";
+var add_start = "256 Lý Thường Kiệt";
+var add_end;
 var dataList;
 var nhanXe = "đã nhận xe";
 window.onload = function () {
@@ -136,7 +136,7 @@ function getState(ind) {
     var str;
     str = document.getElementById("state" + ind).innerHTML;
     if (str === nhanXe) {
-        add_start = document.getElementById("addr" +ind).innerHTML; //lay vi tri bat dau
+        add_end = document.getElementById("addr" +ind).innerHTML; //lay vi tri bat dau
         chiDan();
     }  
 }

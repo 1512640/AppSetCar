@@ -5,6 +5,7 @@ var add_start;
 var add_end;
 var directionsDisplay;
 var directionsService;
+var pos;
 //var ds;
 //var ind=1;
 var marker;
@@ -18,8 +19,8 @@ window.onload = function () {
   function initMap() {
         
     map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 10,
-    center: {lat:10.7699421, lng: 106.6734581 }
+    zoom: 16,
+        center: { lat: 10.771530, lng: 106.657860 }
       });
     directionsService = new google.maps.DirectionsService();    // Khởi tạo DirectionsService - thằng này có nhiệm vụ tính toán chỉ đường cho chúng ta.
     directionsDisplay = new google.maps.DirectionsRenderer({ map: map });    // Khởi tạo DirectionsRenderer - thằng này có nhiệm vụ hiển thị chỉ đường trên bản đồ sau khi đã tính toán.
@@ -35,10 +36,11 @@ window.onload = function () {
               lat: position.coords.latitude,      //loction của vị trí hiện tại
               lng: position.coords.longitude
             };
-            alert( "vi tri hien tai: "+ pos.lat+", "+ pos.lng);
+            //alert( "vi tri hien tai: "+ pos.lat+", "+ pos.lng);
             var origin1 =latLng;
             var destinationA =new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat( position.coords.longitude));
             //alert( "vi tri hien tai: "+ origin1 +","+ destinationA);
+            placeMarkerAndPanTo(destinationA, map);
             var service = new google.maps.DistanceMatrixService();  //dki một dịch vụ tính khoảng cách
             service.getDistanceMatrix(
             {
@@ -54,10 +56,11 @@ window.onload = function () {
               var result=response.rows["0"].elements["0"].distance.value; ///trả về giá trị khoảng cách
               if(result >100)                                   /////// kiểm tra khoảng cách
               {
-                alert(" vui lòng click địa điểm khác")
+                alert("Vui lòng click địa điểm khác trong bán kính 100m")
                 
               }else
               {
+                  alert("Chấp nhận địa chỉ trong bán kính 100m")
                 LatlngUser=latLng;
                 placeMarkerAndPanTo(latLng, map);   //khi trong phạm vi 100m thể hiện marker
                   if(user!==null){
@@ -98,7 +101,6 @@ function placeMarkerAndPanTo(latLng, map) {
     draggable: true
     
   });
-  alert(latLng.lat())
   map.panTo(latLng);
 }
  //Chi duong
@@ -297,10 +299,10 @@ function acceptClient(ind) {
         .then(function (res) {            
             console.log(res.data);
             add_start = LatlngUser;
-            alert(add_start);
             add_end = document.getElementById("add-" + ind).innerHTML;
-            alert(add_end);
+            alert(" bắt đầu");
             calculateAndDisplayRoute(directionsService, directionsDisplay);
+
         }).catch(function (err) {
             console.log(err);
         }).then(function () {

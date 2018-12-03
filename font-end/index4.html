@@ -22,6 +22,7 @@
     <div class="container_repair">
         <div class="row">
             <div class="col-md-6 col-sm-12" id="map1">
+                <h3>Vị trí tài xế</h3>
                 <div id="map"> </div>
             </div>
             <div class="col-md-6 col-sm-12" id="driver">
@@ -71,7 +72,7 @@
         <h3> Thông tin Tài Xế </h3>
         <div class="text-center">
             <h5 id="name-{{stt}}"> Họ tên: {{name}}</h5>
-            <h5 id="add-{{stt}}"> Địa chỉ: {{add}}</h5>
+            
             <h5 id="status"> Trạng thái : {{status}}</h5>
 
         </div>
@@ -119,6 +120,21 @@
         </tr>
         {{/each}}
     </script>
+    <script id="template3" type="text/x-handlebars-template">
+
+        
+        <h3> Thông tin khách hàng </h3>
+        <div class="text-center">
+            <li id="name-{{stt}}"> Họ tên: {{name}}</h5>
+            <h5><a href="#" onclick="codeAddress({{stt}})" id="add-{{stt}}">{{addr}}</a></h5>
+            <td>Số điện thoại {{sdt}}</td>
+            <td>{{note}}</td>
+            <td></td>
+            <td id="accept"> <button onclick="acceptClient({{stt}})" class="btn boder">Bắt đầu</button></td>
+
+        </div>
+        
+        
 
 
 </body>

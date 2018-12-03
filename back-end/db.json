@@ -4,28 +4,10 @@
       "stt": 1,
       "addr": "227 Nguyễn Văn Cừ",
       "name": "Tuấn",
-      "sdt": "",
-      "note": "",
-      "state": "đã định vị",
-      "iat": 1543735422
-    },
-    {
-      "stt": 2,
-      "addr": "453 Bến Bình Đông",
-      "name": "Tú",
-      "sdt": "",
-      "note": "",
-      "state": "đã định vị",
-      "iat": 1543735452
-    },
-    {
-      "stt": 3,
-      "addr": "123 Lý Thường Kiệt",
-      "name": "Tuan",
-      "sdt": "",
-      "note": "",
-      "state": "đã định vị",
-      "iat": 1543735779
+      "sdt": "01215436547",
+      "note": "Đón tôi ở đấy",
+      "state": "đã nhận xe",
+      "iat": 1543760091
     }
   ],
   "driver": [
@@ -33,7 +15,7 @@
       "stt": 1,
       "name": "Van B",
       "pass": "123456",
-      "add": "....",
+      "add": "256 Lý Thường Kiệt",
       "status": "Ready",
       "iat": 1542993941
     }
