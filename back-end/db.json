@@ -6,8 +6,17 @@
       "name": "Tuấn",
       "sdt": "01215436547",
       "note": "Đón tôi ở đấy",
-      "state": "đã nhận xe",
+      "state": "đã định vị",
       "iat": 1543760091
+    },
+    {
+      "stt": 2,
+      "addr": "222 Lý Thường Kiệt",
+      "name": "Tuan",
+      "sdt": "0125235",
+      "note": "....",
+      "state": "đã định vị",
+      "iat": 1544332481
     }
   ],
   "driver": [
