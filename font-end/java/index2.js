@@ -1,4 +1,5 @@
 ﻿var ts = 0;
+var max=0;
 
 window.onload = function () {
     loadInform();
@@ -6,14 +7,31 @@ window.onload = function () {
 }
 
 var loadInform = function() {
-        var url = 'http://localhost:3000/resInform?ts=' + ts;
+        var url = 'http://localhost:3000/resInform?ts=' + ts ;
         axios.get(url)
             .then(function(res) {
               ts = res.data.return_ts;
               var source = document.getElementById('template').innerHTML;
               var template = Handlebars.compile(source);
-              var html = template(res.data.categories);
-              document.getElementById('list').innerHTML += html;
+              //var html = template(res.data.categories);
+              for( var i=0;i<res.data.categories.length;i++)
+              {
+                if( res.data.categories[i].stt > max)
+                {
+                  var html = template(res.data.categories[i]);
+                  document.getElementById('list').innerHTML += html;
+                  console.log(res.data.categories[i]);
+                }
+              }
+
+              
+              var sl=res.data.categories.length;
+              if(max<res.data.categories[sl-1].stt)
+              {
+                max=res.data.categories[sl-1].stt;
+              }
+              console.log(" giá trị stt lớn nhất:"+ max);
+              
               console.log(res.data)
             }).catch(function(err) {
                 console.log(err);

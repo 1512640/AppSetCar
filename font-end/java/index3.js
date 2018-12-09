@@ -2,6 +2,7 @@
 var add_start = "256 Lý Thường Kiệt";
 var add_end;
 var dataList;
+var max=0;
 var nhanXe = "đã nhận xe";
 window.onload = function () {
     $('#Map').css("display", "none");
@@ -102,9 +103,34 @@ function LoadData() {
             dataList = res.data.inform;         
             var source = document.getElementById('template').innerHTML;
             var template = Handlebars.compile(source);
-            var html = template(dataList);        
-            document.getElementById('list').innerHTML += html;
-            for (i = 0; i < dataList.length; i++) {
+            // var html = template(dataList);        
+            // document.getElementById('list').innerHTML += html;
+            var max2=0;
+            for( var i=0;i<dataList.length;i++)
+              {
+                if( dataList[i].stt > max)
+                {
+                  var html = template(dataList[i]);
+                  document.getElementById('list').innerHTML += html;
+                  console.log(dataList[i]);
+                }
+                else{
+                    var html = template(dataList[i]);
+                    document.getElementById('kh-'+dataList[i].stt).innerHTML = html;
+                    
+                }
+                if(dataList[i].stt > max2){
+                    max2=dataList[i].stt;
+                }
+              }
+
+              
+              var sl=dataList.length;
+              if(max< max2)
+              {
+                max=max2;
+              }
+            for (var i = 0; i < dataList.length; i++) {
                 setStatus(dataList[i].stt);
             }
         }).catch(function (err) {
@@ -120,7 +146,7 @@ function setStatus(stt) {
         case "đã định vị":
             $('#state' + stt).addClass("bg-warning text-white");
             break
-        case nhanXe:
+        case "đã nhận xe":
             $('#state' + stt).addClass("bg-info text-white");
             break;
         case "đang di chuyển":

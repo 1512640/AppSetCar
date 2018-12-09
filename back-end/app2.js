@@ -10,6 +10,7 @@ var router = express.Router();
 
 router.get('/', (req, res) => {
     var ts = 0;
+    //var max= req.query.max;
     if (req.query.ts) {
         ts = +req.query.ts;
     }
@@ -29,7 +30,7 @@ router.get('/', (req, res) => {
     }
         
     }
-    var categories = db.get('customer').filter(c => c.iat >= ts);
+    var categories = db.get('customer').filter(c =>c.iat >= ts );
 
     var return_ts = moment().unix();
     res.json({

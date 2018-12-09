@@ -44,14 +44,14 @@
 
     <script id="template" type="text/x-handlebars-template">
 
-        {{#each this}}
-        <tr class="text-center">
+        
+        <tr class="text-center" id="kh-{{stt}}">
             <td id="name-{{stt}}">{{name}}</td>
             <td><a href="#" onclick="codeAddress({{stt}})" id="add-{{stt}}">{{addr}}</a></td>
             <td>{{sdt}}</td>
             <td>{{note}}</td>
         </tr>
-        {{/each}}
+        
     </script>
 
 </body>

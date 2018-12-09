@@ -35,15 +35,15 @@
 
                 <tbody id="list">
                     <script id="template" type="text/x-handlebars-template">
-                        {{#each this}}
-                        <tr class="text-center">
+                        
+                        <tr class="text-center" id="kh-{{stt}}">
                             <td>{{stt}}</td>
                             <td>{{name}}</td>
                             <td id="addr{{stt}}">{{addr}}</td>
                             <td>{{sdt}}</td>
                             <td><button id="state{{stt}}" onclick="getState({{ stt }})" class="boder">{{state}}</button></td>
                         </tr>
-                        {{/each}}
+                        
                     </script>
                 </tbody>
 
