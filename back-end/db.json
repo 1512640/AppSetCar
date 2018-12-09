@@ -6,8 +6,8 @@
       "name": "Tuấn",
       "sdt": "01215436547",
       "note": "Đón tôi ở đấy",
-      "state": "đã định vị",
-      "iat": 1543760091
+      "state": "đã nhận xe",
+      "iat": 1544337662
     },
     {
       "stt": 2,
@@ -17,6 +17,15 @@
       "note": "....",
       "state": "đã định vị",
       "iat": 1544332481
+    },
+    {
+      "stt": 3,
+      "addr": "17 Hoàng Diệu Thủ đức TP HCM",
+      "name": "Nguyễn Văn Trung",
+      "sdt": "1223123131",
+      "note": "xe đạp",
+      "state": "đã định vị",
+      "iat": 1544337508
     }
   ],
   "driver": [

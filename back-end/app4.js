@@ -84,7 +84,10 @@ router.get('/setClient', (req, res) => { ////chỉnh sửa thông tin khi driver
         .find({ stt: vitri })
         .assign({ state: req.query.state})
         .write();
-    
+    db.get('customer')
+            .find({ stt: vitri })
+            .assign({ iat: moment().unix()})
+            .write()
     
     res.json({
         msg:"accept success"

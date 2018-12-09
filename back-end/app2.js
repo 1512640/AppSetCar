@@ -16,11 +16,18 @@ router.get('/', (req, res) => {
     var adapter = new fileSync('./db.json');
     var db = low(adapter);
     for (var i=0;i<db.get('customer').size().value();i++)
-    {
-        db.get('customer')
-        .find({ stt: i+1 })
-        .assign({ state: 'đã định vị'})
-        .write()
+    {   if(db.get('customer')
+        .find({ stt: i+1 }).get('state').value() === "chưa được định vị" ){
+            db.get('customer')
+            .find({ stt: i+1 })
+            .assign({ state: 'đã định vị'})
+            .write()
+            db.get('customer')
+            .find({ stt: i+1 })
+            .assign({ iat: moment().unix()})
+            .write()
+    }
+        
     }
     var categories = db.get('customer').filter(c => c.iat >= ts);
 
