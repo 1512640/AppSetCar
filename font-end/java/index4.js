@@ -227,24 +227,24 @@ function setStatus2(){
     axios.get(url)
         .then(function (res) {
             if (res.status == 200) {
-            alert("Bạn sẽ không nhận khách khi đổi sang trạng thái Standby");
-            user = res.data.temp;
-            //alert(res.data.temp);
-            //window.location="./index4.html";
-          
-            document.getElementById("status").innerHTML = "Trạng thai:Standby";
-            document.getElementById("list2").innerHTML = "";
-            ts=0;
-           
-        }
-        else {
-            alert(res.data.msg);
-        }
+                alert("Bạn sẽ không nhận khách khi đổi sang trạng thái Standby");
+                user = res.data.temp;
+                //alert(res.data.temp);
+                //window.location="./index4.html";
+
+                document.getElementById("status").innerHTML = "Trạng thai:Standby";
+                document.getElementById("list2").innerHTML = "";
+                ts = 0;
+
+            }
+            else {
+                alert(res.data.msg);
+            }
         }).catch(function (err) {
             console.log(err);
         }).then(function () {
             //setTimeout(loadInform, 3500);
-        })
+        });
 }
 // function setAddr(){          // cập nhật địa chỉ của driver
 //   if(user.status=="Ready"){

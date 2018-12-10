@@ -14,11 +14,13 @@ router.get('/', (req, res) => {
     var db = low(adapter);
 
     var inform = db.get('customer').filter(c => c.iat >= ts);
-    
+    var drive = db.get('driver');
+
 
     var return_ts = moment().unix();
     console.log(inform.size().value());
     res.json({
+        drive,
         inform,
         return_ts
     });

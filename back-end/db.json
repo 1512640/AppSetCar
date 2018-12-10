@@ -7,7 +7,7 @@
       "sdt": "01215436547",
       "note": "Đón tôi ở đấy",
       "state": "đã nhận xe",
-      "iat": 1544345841
+      "iat": 1544346318
     },
     {
       "stt": 2,
@@ -79,7 +79,7 @@
       "name": "Van B",
       "pass": "123456",
       "add": "256 Lý Thường Kiệt",
-      "status": "Ready",
+      "status": "Standby",
       "iat": 1542993941
     }
   ]

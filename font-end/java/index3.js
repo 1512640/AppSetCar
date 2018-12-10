@@ -1,5 +1,5 @@
 ﻿var ts = 0;
-var add_start = "256 Lý Thường Kiệt";
+var add_start;
 var add_end;
 var dataList;
 var max=0;
@@ -100,6 +100,7 @@ function LoadData() {
     axios.get(url)
         .then(function (res) { //success
             ts = res.data.return_ts;
+            add_start = res.data.drive[0].add;
             dataList = res.data.inform;         
             var source = document.getElementById('template').innerHTML;
             var template = Handlebars.compile(source);
@@ -145,7 +146,7 @@ function setStatus(stt) {
     switch (state) {
         case "đã định vị":
             $('#state' + stt).addClass("bg-warning text-white");
-            break
+            break;
         case "đã nhận xe":
             $('#state' + stt).addClass("bg-info text-white");
             break;
