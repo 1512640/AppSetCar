@@ -11,8 +11,10 @@ var pos;
 var marker;
 var LatlngUser; // dau vao 
 var ts=0;
+var geocoder;
 window.onload = function () {
   //$("#registration").css('display', 'none');
+  
     initMap(); 
 }
 
@@ -29,70 +31,102 @@ window.onload = function () {
     
     }); 
   }
-  function geoLocation(latLng){      ///hàm lấy vị trí hiện tại
+  function geoLocation(latLng){  
+    geocoder = new google.maps.Geocoder();    ///hàm lấy vị trí hiện tại
     if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,      //loction của vị trí hiện tại
               lng: position.coords.longitude
-            };
-            //alert( "vi tri hien tai: "+ pos.lat+", "+ pos.lng);
-            var origin1 =latLng;
-            var destinationA =new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat( position.coords.longitude));
-            //alert( "vi tri hien tai: "+ origin1 +","+ destinationA);
-            placeMarkerAndPanTo(destinationA, map);
-            var service = new google.maps.DistanceMatrixService();  //dki một dịch vụ tính khoảng cách
-            service.getDistanceMatrix(
-            {
-              origins: [origin1],
-              destinations: [destinationA],
-              travelMode: 'WALKING',
-              
-              unitSystem: google.maps.UnitSystem.METRIC ,
-              avoidHighways: true,
-              avoidTolls: true,
-            }, function callback(response, status) {
-             if (status == 'OK') {
-              var result=response.rows["0"].elements["0"].distance.value; ///trả về giá trị khoảng cách
-              if(result >100)                                   /////// kiểm tra khoảng cách
-              {
-                alert("Vui lòng click địa điểm khác trong bán kính 100m")
-                
-              }else
-              {
-                  alert("Chấp nhận địa chỉ trong bán kính 100m")
-                LatlngUser=latLng;
-                placeMarkerAndPanTo(latLng, map);   //khi trong phạm vi 100m thể hiện marker
-                  if(user!==null){
-                  axios({
-                  method: 'post',
-                  url: 'http://localhost:3000/driver/setAdd?stt='+user.stt,
-                  data: LatLng
-                  });
-              }
-
-              }
-            //alert('khoảng cách là:'+result);
-            console.log(response);
-            }else{
-            alert("không đo được khoảng cách");
             }
+         //var destinationA = {lat: parseFloat(position.coords.latitude), lng: parseFloat( position.coords.longitude)};
+            var destinationA =new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat( position.coords.longitude));
+            placeMarkerAndPanTo(destinationA, map);
+            geocoder.geocode({'location': pos}, function(results, status) {
+              if (status === 'OK') {
+                if (results[0]) {
+                  //map.setZoom(11);
+                  // var marker = new google.maps.Marker({
+                  //   position: latlng,
+                  //   map: map
+                  // });
+                  // infowindow.setContent(results[0].formatted_address);
+                  console.log(" địa điểm:" + results[0].formatted_address);
+                  setAddr(results[0].formatted_address);
+                  document.getElementById("addr-"+user.stt).innerHTML="Địa chỉ hiện tại :"+results[0].formatted_address;
+                  // infowindow.open(map, marker);
+                } else {
+                  window.alert('No results found');
+                }
+              } else {
+                window.alert('Geocoder failed due to: ' + status);
+              }
+            });
+
+
+
+
+
+
+            //alert( "vi tri hien tai: "+ pos.lat+", "+ pos.lng);
+        //     var origin1 =latLng;
+        //     var destinationA =new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat( position.coords.longitude));
+        //     //alert( "vi tri hien tai: "+ origin1 +","+ destinationA);
+        //     placeMarkerAndPanTo(destinationA, map);
+        //     var service = new google.maps.DistanceMatrixService();  //dki một dịch vụ tính khoảng cách
+        //     service.getDistanceMatrix(
+        //     {
+        //       origins: [origin1],
+        //       destinations: [destinationA],
+        //       travelMode: 'WALKING',
+              
+        //       unitSystem: google.maps.UnitSystem.METRIC ,
+        //       avoidHighways: true,
+        //       avoidTolls: true,
+        //     }, function callback(response, status) {
+        //      if (status == 'OK') {
+        //       var result=response.rows["0"].elements["0"].distance.value; ///trả về giá trị khoảng cách
+        //       if(result >100)                                   /////// kiểm tra khoảng cách
+        //       {
+        //         alert("Vui lòng click địa điểm khác trong bán kính 100m")
+                
+        //       }else
+        //       {
+        //           alert("Chấp nhận địa chỉ trong bán kính 100m")
+        //         LatlngUser=latLng;
+        //         placeMarkerAndPanTo(latLng, map);   //khi trong phạm vi 100m thể hiện marker
+        //           if(user!==null){
+        //           axios({
+        //           method: 'post',
+        //           url: 'http://localhost:3000/driver/setAdd?stt='+user.stt,
+        //           data: LatLng
+        //           });
+        //       }
+
+        //       }
+        //     //alert('khoảng cách là:'+result);
+        //     console.log(response);
+        //     }else{
+        //     alert("không đo được khoảng cách");
+        //     }
   
-          });
+        //   });
 
           
-          //   infoWindow.setPosition(pos);
-          //   infoWindow.setContent('Location found.');
-          //   infoWindow.open(map);
-          //   map.setCenter(pos);
-          // }, function() {
-          //   handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+        //   //   infoWindow.setPosition(pos);
+        //   //   infoWindow.setContent('Location found.');
+        //   //   infoWindow.open(map);
+        //   //   map.setCenter(pos);
+        //   // }, function() {
+        //   //   handleLocationError(true, infoWindow, map.getCenter());
+        //   });
+        // } else {
+        //   // Browser doesn't support Geolocation
+        //   handleLocationError(false, infoWindow, map.getCenter());
+        // }
+      });
         }
-      }
+  }
 
 function placeMarkerAndPanTo(latLng, map) {
    marker = new google.maps.Marker({
@@ -120,7 +154,23 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         }
     });
 }
-
+function setAddr(addr)       ///////// hàm gửi địa chỉ cho db.json
+{
+  var url = "http://localhost:3000/driver/setAdd?stt="+user.stt+"&addr="+ addr;
+    axios.get(url)
+        .then(function (res) {
+            
+            
+            
+           
+        
+       
+        }).catch(function (err) {
+            console.log(err);
+        }).then(function () {
+            //setTimeout(loadInform, 3500);
+        })
+}
 
 function registration() {
     $("#signIn").css('display', 'none');
@@ -294,20 +344,62 @@ function requestDriver()
 function acceptClient(ind) {
     alert(ind);
   var vitri=user.stt;
-  var url = 'http://localhost:3000/driver/setClient?stt=' + vitri+'&state='+"đã nhận xe";
+  var url = 'http://localhost:3000/driver/setClient?stt=' + ind+'&state='+"đã nhận xe";
     axios.get(url)
-        .then(function (res) {            
-            console.log(res.data);
-            add_start = LatlngUser;
-            add_end = document.getElementById("add-" + ind).innerHTML;
-            alert(" bắt đầu");
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        .then(function (res) {  
+        console.log(res.data.kh);       
+            alert(res.data.kh)
+            var source = document.getElementById('template3').innerHTML;
+              var template = Handlebars.compile(source);
+              var html = template(res.data.kh);
+              //var db=res.data.categories;
+              document.getElementById('list2').innerHTML = html;
+              
 
         }).catch(function (err) {
             console.log(err);
         }).then(function () {
-            setTimeout(requestDriver, 3000);
+            
         })
+}
+
+function dichuyen(ind) {
+    alert(ind);
+  var vitri=user.stt;
+  var url = 'http://localhost:3000/driver/setClient?stt=' + ind+'&state='+"đã di chuyển";
+    axios.get(url)
+        .then(function (res) {  
+              
+            alert('Bạn đang di chuyển')
+            
+              document.getElementById('dichuyen').innerHTML =null;
+
+        }).catch(function (err) {
+            console.log(err);
+        }).then(function () {
+            
+        })
+}
+function ketthuc(ind) {
+    alert(ind);
+  var vitri=user.stt;
+  var url = 'http://localhost:3000/driver/setClient?stt=' + ind+'&state='+"đã hoàn thành";
+    axios.get(url)
+        .then(function (res) {  
+              
+            alert('Bạn đã hoàn thành')
+            requestDriver();
+              
+
+        }).catch(function (err) {
+            console.log(err);
+        }).then(function () {
+            
+        })
+}
+function refuseClient(ind) {
+    document.getElementById("kh-"+ind).innerHTML = null;
+                    
 }
 window.onunload = function () {
   //$("#registration").css('display', 'none');

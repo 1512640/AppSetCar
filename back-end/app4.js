@@ -8,9 +8,9 @@ var db = low(adapter);
 
 var router = express.Router();
 
-router.post('/setAdd',(req,res) =>{
-	var add=req.data;
-	var i=req.query.stt;
+router.get('/setAdd',(req,res) =>{
+	var add=req.query.addr;
+	var i=+req.query.stt;
 	db.get('driver').find({stt:i}).assign({ add: add}).write();
 	res.json({
 		msg:" post Addr success"
@@ -88,9 +88,11 @@ router.get('/setClient', (req, res) => { ////chỉnh sửa thông tin khi driver
             .find({ stt: vitri })
             .assign({ iat: moment().unix()})
             .write()
-    
+    var kh = db.get('customer').filter(c => (c.stt ===vitri));
+        
     res.json({
-        msg:"accept success"
+        msg:"accept success",
+        kh
     });
 	};
 

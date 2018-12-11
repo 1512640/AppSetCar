@@ -8,15 +8,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW-LxWC1ML0a6FbUzgC6ExKfh6xrb8oZM&callback=initMap"
-            async defer></script>
+   
     <link rel="stylesheet" href="./css/deafault.css" />
     <link rel="stylesheet" href="./css/index2.css" />
     <link rel="stylesheet" href="./css/index4.css">
     <script type="text/javascript" src="./java/index4.js"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMOaGHMCXMiyGrhu1HwVGLfhasIDVrj1M&callback=initMap">
-    </script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCW-LxWC1ML0a6FbUzgC6ExKfh6xrb8oZM&callback=initMap"
+            async defer></script>
 </head>
 <body>
     <div class="container_repair">
@@ -71,9 +69,9 @@
 
         <h3> Thông tin Tài Xế </h3>
         <div class="text-center">
-            <h5 id="name-{{stt}}"> Họ tên: {{name}}</h5>
-            
-            <h5 id="status"> Trạng thái : {{status}}</h5>
+            <h5 id="name-{{stt}}">Họ tên: {{name}}</h5>
+            <h5 id="addr-{{stt}}">Đia chỉ hiện tại:..........</h5>
+            <h5 id="status">Trạng thái : {{status}}</h5>
 
         </div>
         <div class="form-check" onclick="setStatus2()">
@@ -94,7 +92,7 @@
                     <th class="text-center" scope="col">Số điện thoại</th>
                     <th class="text-center" scope="col">Ghi chú</th>
                     <th class="text-center" scope="col">Thởi điểm đặt</th>
-                    <th class="text-center" scope="col"> Đồng ý nhận xe</th>
+                    
                 </tr>
             </thead>
         </table>
@@ -104,31 +102,31 @@
     <script id="template2" type="text/x-handlebars-template">
 
         {{#each this}}
-        <tr class="text-center">
+        <tr class="text-center" id="kh-{{stt}}">
             <td id="name-{{stt}}" class="text-center">{{name}}</td>
             <td><a href="#" onclick="codeAddress({{stt}})" id="add-{{stt}}">{{addr}}</a></td>
             <td>{{sdt}}</td>
             <td>{{note}}</td>
             <td></td>
             <td id="accept"> <button onclick="acceptClient({{stt}})" class="btn boder">Đồng ý</button></td>
+            <td id="refuse"> <button onclick="refuseClient({{stt}})" class="btn boder">Từ Chối</button></td>
         </tr>
         {{/each}}
     </script>
     <script id="template3" type="text/x-handlebars-template">
-
-        
-        <h3> Thông tin khách hàng </h3>
-        <div class="text-center">
-            <li id="name-{{stt}}"> Họ tên: {{name}}</h5>
-            <h5><a href="#" onclick="codeAddress({{stt}})" id="add-{{stt}}">{{addr}}</a></h5>
-            <td>Số điện thoại {{sdt}}</td>
-            <td>{{note}}</td>
-            <td></td>
-            <td id="accept"> <button onclick="acceptClient({{stt}})" class="btn boder">Bắt đầu</button></td>
-
-        </div>
-        
-        
+        {{#each this}}
+        <h3>Thông tin khách hàng<h3>
+        <tr class="text-center" id="kh-{{stt}}">
+            <li id="name-{{stt}}" class="text-center">{{name}}</li>
+            <li><a href="#" onclick="codeAddress({{stt}})" id="add-{{stt}}">{{addr}}</a></li>
+            <li>Số điện thoại: {{sdt}}</li>
+            <li>Ghi chú: {{note}}</li>
+           
+            <li id="dichuyen"> <button onclick="dichuyen({{stt}})" class="btn boder">Di chuyển</button></li>
+            <li id="ketthuc"> <button onclick="ketthuc({{stt}})" class="btn boder">kết thúc</button></li>
+        </tr>
+        {{/each}}
+        </script>
 
 
 </body>

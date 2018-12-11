@@ -17,61 +17,8 @@
       "note": "....",
       "state": "đã định vị",
       "iat": 1544332481
-    },
-    {
-      "stt": 3,
-      "addr": "17 Hoàng Diệu Thủ đức TP HCM",
-      "name": "Nguyễn Văn Trung",
-      "sdt": "1223123131",
-      "note": "xe đạp",
-      "state": "đã định vị",
-      "iat": 1544337508
-    },
-    {
-      "stt": 4,
-      "addr": "20 Hòa Bình Thủ đức TP HCM",
-      "name": "Nguyễn QUang Tuấn",
-      "sdt": "1223123131",
-      "note": "xe máy",
-      "state": "đã định vị",
-      "iat": 1544339447
-    },
-    {
-      "stt": 5,
-      "addr": "22 Thống nhất Thủ đức TP HCM",
-      "name": "Nguyễn Anh Tuấn",
-      "sdt": "09081112133",
-      "note": "Xe mới nha",
-      "state": "đã định vị",
-      "iat": 1544342273
-    },
-    {
-      "stt": 6,
-      "addr": "50 Thống nhất Thủ đức TP HCM",
-      "name": "Nguyễn Minh Tuấn",
-      "sdt": "09081112133",
-      "note": "Xe mới nha",
-      "state": "đã định vị",
-      "iat": 1544342273
-    },
-    {
-      "stt": 7,
-      "addr": "80 Đặng Văn Bi Thủ đức TP HCM",
-      "name": "Van b",
-      "sdt": "121354",
-      "note": "",
-      "state": "đã định vị",
-      "iat": 1544342273
-    },
-    {
-      "stt": 8,
-      "addr": "80 Đặng Văn Bi Thủ đức TP HCM",
-      "name": "Van C",
-      "sdt": "121354",
-      "note": "",
-      "state": "đã định vị",
-      "iat": 1544343169
     }
+    
   ],
   "driver": [
     {
@@ -79,7 +26,7 @@
       "name": "Van B",
       "pass": "123456",
       "add": "256 Lý Thường Kiệt",
-      "status": "Standby",
+      "status": "Ready",
       "iat": 1542993941
     }
   ]
